@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f7f9fc;
+      }
+
+      fieldset {
+        border: 2px solid #4a90e2;
+        border-radius: 8px;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      legend {
+        font-weight: bold;
+        color: #4a90e2;
+        padding: 0 8px;
+      }
+
+      /* Master (tabela de clientes) */
+      .master {
+        width: 30%;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+
+      th {
+        background: #f0f4fa;
+        color: #333;
+      }
+
+      tr:hover {
+        background: #f9fcff;
+        cursor: pointer;
+      }
+
+      /* Details (formulário) */
+      .details {
+        width: 15%;
+      }
+
+      label {
+        font-size: 14px;
+        color: #333;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      input[type="button"] {
+        width: 100%;
+        padding: 10px;
+        background: #4a90e2;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      input[type="button"]:hover {
+        background: #357abd;
+      }
+	  
+	  .botoes{
+		display: flex;
+		gap: 5px;
+	  }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <fieldset class="details">
+        <legend>Detalhes do Cliente</legend>
+        <div>
+          <label>Nome</label><br>
+          <input type="text" id="nome">
+        </div>
+        <div>
+          <label>E-mail</label><br>
+          <input type="email" id="email">
+        </div>
+		<div class="botoes">
+			<input type="button" value="Salvar" id="btnSalvar">
+			<input type="button" value="Novo" id="btnNovo">
+		</div>
+      </fieldset>
+	  <br>
+      <fieldset class="master">
+        <legend>Clientes Cadastrados</legend>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+          <tbody id = "tabelaClientes">
+           
+          </tbody>
+        </table>
+      </fieldset>
+
+    </div>
+  </body>
+  	<script>
+	  const txtNome = document.getElementById("nome");
+	  const txtEmail = document.getElementById("email");
+	  const tabeleClientes = document.getElementById("tabelaClientes");
+	  const btnNovo = document.getElementById("btnNovo");
+	  const btnSalvar = document.getElementById("btnSalvar");
+	  
+	  const listaClientes = [
+		{"nome":"João Silva", "email": "joao@email.com"},
+		{"nome":"Maria Souza", "email": "maria@email.com"},
+		{"nome":"Pedro Oliveira", "email": "pedro@email.com"}
+	  ]
+	  
+	  
+	  document.addEventListener('DOMContentLoaded', () => {
+			window.setTimeout(txtNome.focus(),100);
+			
+			listaClientes.forEach(cliente => {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${cliente.nome}</td>
+          <td>${cliente.email}</td>
+        `;
+
+        // Evento de clique para preencher formulário
+        tr.addEventListener("click", () => {
+          document.getElementById("nome").value = cliente.nome;
+          document.getElementById("email").value = cliente.email;
+        });
+
+			tabeleClientes.appendChild(tr);
+		  });
+	  })
+	  
+	  btnNovo.addEventListener("click", () => {
+          txtNome.value = ""
+		  txtEmail.value = "";
+          txtNome.focus();
+        });
+		
+		btnSalvar.addEventListener("click", () => {
+		  const tr = document.createElement("tr");
+		  
+          tr.innerHTML = `
+           <td>${txtNome.value}</td>
+           <td>${txtEmail.value}</td>
+          `;
+		  
+		  tabeleClientes.appendChild(tr);
+          txtNome.value = ""
+		  txtEmail.value = "";
+          txtNome.focus();
+        });
+  </script>
+</html>
