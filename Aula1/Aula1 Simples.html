@@ -1,0 +1,31 @@
+<html>
+	<header>
+		<title>Aula1</title>
+	</header>
+	<body>
+		<label>Nome:</label>
+		<br/>
+		<input type="text" id="txtNome" >
+		<br/>
+		<label>Email:</label>
+		<br/>
+		<input type="text" id="txtEmail">
+		<br/>
+		<br/>
+		<input type="button" onclick="Salvar('Salvou')" value="Salvar">
+		<input type="button" onclick="Novo()" value="Novo">
+	</body>
+	<script>
+		function Salvar(texto)
+		{
+			alert(texto)
+		}
+
+		function Novo()
+		{
+			document.getElementById("txtNome").value = ""
+			document.getElementById("txtEmail").value = ""
+			document.getElementById("txtNome").focus()
+		}
+	</script>
+</html>
