@@ -1,0 +1,97 @@
+<html>
+	<header>
+		<title>Aula1</title>
+	</header>
+	<style>
+	  table {
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+	  
+	  th, td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+	  
+	  input[type="text"]{
+       padding: 3px;
+       margin-top: 5px; 
+       margin-bottom: 15px; 
+       border: 1px solid #ccc;
+       border-radius: 4px; 
+       }
+	  
+	</style>
+	<body>
+		<label>Nome:</label>
+		<br/>
+		<input type="text" id="txtNome" >
+		<br/>
+		<label>Email:</label>
+		<br/>
+		<input type="text" id="txtEmail">
+		<br/>
+		<br/>
+		<input type="button" onclick="Salvar('Salvou')" value="Salvar">
+		<input type="button" onclick="Novo()" value="Novo">
+		
+		<br/>
+		<br/>
+		<table id="tblCliente">
+			<thead>
+				<tr>
+					<th>
+					Nome
+					</th>
+					<th>
+					Email
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			</tbody>
+		</table>
+	</body>
+	<script>
+		
+		const txtNome = document.getElementById("txtNome");
+		const txtEmail = document.getElementById("txtEmail");
+		const tblCliente = document.getElementById("tblCliente");
+		
+		function Salvar(texto)
+		{
+			if(txtNome.value == "" || txtEmail.value == "")
+			{
+				alert("Preencha as informações!");
+			}
+			else
+			{
+				adicionaNaTabela();
+			}
+		}
+
+		function Novo()
+		{
+			txtNome.value = ""
+			txtEmail.value = ""
+			txtNome.focus()
+		}
+		
+		function adicionaNaTabela()
+		{
+		  const tr = document.createElement("tr");
+		  
+          tr.innerHTML = `
+           <td>${txtNome.value}</td>
+           <td>${txtEmail.value}</td>
+          `;
+		  
+		  tblCliente.appendChild(tr);
+          txtNome.value = ""
+		  txtEmail.value = "";
+          txtNome.focus();
+        };
+	</script>
+</html>
